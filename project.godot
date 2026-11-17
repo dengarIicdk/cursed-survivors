@@ -29,7 +29,6 @@ Settings="*res://autoloads/settings.gd"
 Loc="*res://autoloads/loc.gd"
 AudioManager="*res://autoloads/audio_manager.gd"
 ItemDatabase="*res://scripts/items/item_database.gd"
-McpBridge="*res://.mcp/godot-runtime/bridge/mcp_bridge.gd"
 
 [display]
 
