@@ -6,7 +6,7 @@ evolve a cursed arsenal, and break the ring of elites that closes around you.**
 ![Gameplay](docs/assets/ring.jpg)
 
 [**Download for Windows**](../../releases/latest) ·
-[**Play page / website**](https://YOUR-USER.github.io/cursed-survivors/) ·
+[**Play page / website**](https://dengarIicdk.github.io/cursed-survivors/) ·
 [**Report a bug**](../../issues)
 
 - **4 survivors** — Hexblade, Ironclad, Wraithborn, Stormcaller, each with their own weapon branch
