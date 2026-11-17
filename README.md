@@ -22,9 +22,10 @@ Engine: **Godot 4.7**. Licence: **MIT**. Fonts: SIL OFL.
 
 ## Run it
 
-**Players:** grab `CursedSurvivors-1.0-win64.zip` from the releases page, unzip, run
-`CursedSurvivors.exe`. No installer, saves live in
-`%APPDATA%\Godotpp_userdata\CursedSurvivors\`.
+**Players:** run `CursedSurvivors-1.0.0-setup.exe` from the releases page — it installs
+to Program Files, adds a Start menu shortcut and an uninstaller, and offers Russian or
+English. A portable `CursedSurvivors-1.0-win64.zip` is on the same page. Saves live in
+`%APPDATA%\Godotpp_userdata\CursedSurvivors\` and survive an uninstall.
 
 **Developers:**
 
@@ -45,11 +46,18 @@ python gen_wildlife.py ..   # ambient critters
 python gen_audio.py ..      # music loops and sound effects
 ```
 
-Export a Windows build:
+Export a Windows build, then wrap it in an installer:
 
 ```bash
+# 1. strip the local MCP autoload from project.godot, then export
 godot --headless --path . --export-release "Windows Desktop" build/CursedSurvivors.exe
+
+# 2. Inno Setup 6 (free): the installer script lives in installer/
+"C:/Program Files (x86)/Inno Setup 6/ISCC.exe" installer/CursedSurvivors.iss
 ```
+
+The app icon is generated too: `python tools/gen_icon.py .` writes `assets/icon.png`
+and a multi-size `assets/icon.ico` used by both the exe and the installer.
 
 The website in `docs/` is plain HTML/CSS and is published with GitHub Pages.
 
