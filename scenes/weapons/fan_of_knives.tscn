@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://weapon_fan_of_knives"]
+
+[ext_resource type="Script" path="res://scripts/weapons/fan_of_knives.gd" id="1_fan_of_knives"]
+
+[node name="FanOfKnives" type="Node"]
+script = ExtResource("1_fan_of_knives")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://weapon_lightning_chain"]
+
+[ext_resource type="Script" path="res://scripts/weapons/lightning_chain.gd" id="1_chain"]
+
+[node name="LightningChain" type="Node"]
+script = ExtResource("1_chain")

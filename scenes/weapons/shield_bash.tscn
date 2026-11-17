@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://weapon_shield_bash"]
+
+[ext_resource type="Script" path="res://scripts/weapons/shield_bash.gd" id="1_shield_bash"]
+
+[node name="ShieldBash" type="Node"]
+script = ExtResource("1_shield_bash")

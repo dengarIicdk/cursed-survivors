@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ui_level_up_screen"]
+
+[ext_resource type="Script" path="res://scripts/ui/level_up_screen.gd" id="1_levelup"]
+
+[node name="LevelUpScreen" type="CanvasLayer"]
+process_mode = 3
+layer = 20
+script = ExtResource("1_levelup")

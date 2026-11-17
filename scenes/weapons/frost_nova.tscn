@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://weapon_frost_nova"]
+
+[ext_resource type="Script" path="res://scripts/weapons/frost_nova.gd" id="1_frost_nova"]
+
+[node name="FrostNova" type="Node"]
+script = ExtResource("1_frost_nova")

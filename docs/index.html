@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cursed Survivors — gothic survivor-like arena game</title>
+<meta name="description" content="Cursed Survivors is a free gothic survivor-like: hold a shrinking arena against undead crowds, evolve a cursed arsenal and break the closing ring. Windows build, open source.">
+<meta property="og:title" content="Cursed Survivors">
+<meta property="og:description" content="Hold the night. Break the ring. A free gothic survivor-like for Windows.">
+<meta property="og:image" content="assets/ring.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <span class="wordmark">Cursed Survivors</span>
+    <span class="spacer"></span>
+    <a class="navlink" href="#features" data-ru="Особенности">Features</a>
+    <a class="navlink" href="#screens" data-ru="Скриншоты">Screenshots</a>
+    <a class="navlink" href="#play" data-ru="Как играть">How to play</a>
+    <a class="navlink" href="#credits" data-ru="Благодарности">Credits</a>
+    <button class="lang" id="langBtn" type="button">RU</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="inner">
+    <span class="kicker" data-ru="Бесплатно · Windows · Открытый код">Free · Windows · Open source</span>
+    <h1>Cursed Survivors</h1>
+    <p class="tag" data-ru="Выживи в ночи, собери души и прорви кольцо мёртвых, которое сжимается вокруг тебя.">
+      Survive the night, harvest souls, and break the closing ring of the dead.
+    </p>
+    <div class="actions">
+      <a class="btn primary" id="downloadBtn" href="#download" data-ru="Скачать для Windows">Download for Windows</a>
+      <a class="btn ghost" href="#screens" data-ru="Посмотреть скриншоты">See screenshots</a>
+    </div>
+    <p class="meta" data-ru="Версия 1.0 · около 110 МБ · без установки · Godot 4.7">
+      Version 1.0 · about 110 MB · no installer · Godot 4.7
+    </p>
+  </div>
+</header>
+
+<section class="dim" id="features">
+  <div class="wrap">
+    <h2 data-ru="Кровь, кости и очень плохие соседи">Blood, bone and very bad neighbours</h2>
+    <p class="sub" data-ru="Четыре выживших, десятки проклятий, две карты и одна привычка: не стоять на месте.">
+      Four survivors, dozens of curses, two maps, and one rule: never stand still.
+    </p>
+
+    <div class="grid">
+      <article class="card">
+        <p class="tagline" data-ru="Сжимающееся кольцо">The closing ring</p>
+        <h3 data-ru="Стена из тел">A wall of bodies</h3>
+        <p data-ru="Каждые полторы минуты вокруг тебя смыкается кольцо элит. Оно не нарисовано на земле — его держат сами мобы. Прорви дыру или беги, пока круг не сжался.">
+          Every ninety seconds a ring of elites closes around you. Nothing is painted on the ground — the
+          mobs are the wall. Cut a hole in it or outrun it before it closes.
+        </p>
+      </article>
+
+      <article class="card">
+        <p class="tagline" data-ru="Свой приём у каждого">Everyone has a move</p>
+        <h3 data-ru="Девять врагов, девять атак">Nine enemies, nine attacks</h3>
+        <p data-ru="Трупы делают выпад, призраки тянут холодом, рыцари идут в размеченный таран, лич бьёт веером костей. Каждая атака телеграфируется — и наказывает.">
+          Corpses lunge, ghosts chill, knights telegraph a charge, the Lich fires a bone fan. Every attack
+          announces itself, then punishes you for ignoring it.
+        </p>
+      </article>
+
+      <article class="card">
+        <p class="tagline" data-ru="Арсенал под класс">Class arsenals</p>
+        <h3 data-ru="Классы и эволюции">Classes and evolutions</h3>
+        <p data-ru="Клинок Скверны, Железный, Дитя Тени и Зов Бури ведут каждый свою ветку оружия. Доведи оружие до предела — и оно переродится в нечто хуже.">
+          Hexblade, Ironclad, Wraithborn and Stormcaller each pull from their own weapon branch. Max a
+          weapon and it evolves into something worse.
+        </p>
+      </article>
+
+      <article class="card">
+        <p class="tagline" data-ru="Души остаются">Souls persist</p>
+        <h3 data-ru="Проклятая лавка">The Cursed Shop</h3>
+        <p data-ru="Души, собранные за забег, уходят на постоянные благословения, новых героев и вторую карту. Цены растут с каждым уровнем — прогресс придётся заслужить.">
+          Souls earned in a run buy permanent blessings, new survivors and a second map. Prices climb with
+          every level, so progress has to be earned.
+        </p>
+      </article>
+
+      <article class="card">
+        <p class="tagline" data-ru="Сделано с нуля">Made from scratch</p>
+        <h3 data-ru="Ни одного чужого ассета">No borrowed art</h3>
+        <p data-ru="Все спрайты, фон, иконки, музыка и звуки сгенерированы кодом в этом же репозитории. Шрифты — свободные, с лицензией OFL.">
+          Every sprite, backdrop, icon, track and sound effect is generated by scripts in this repository.
+          Fonts are OFL.
+        </p>
+      </article>
+
+      <article class="card">
+        <p class="tagline" data-ru="Два языка">Two languages</p>
+        <h3 data-ru="EN / RU из коробки">EN / RU out of the box</h3>
+        <p data-ru="Полная локализация интерфейса, настроек и описаний. Переключение в меню настроек, вместе с громкостью, разрешением и режимом окна.">
+          Full localisation of the interface, settings and tooltips, switchable in-game along with volume,
+          resolution and window mode.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="screens">
+  <div class="wrap">
+    <h2 data-ru="Так это выглядит">What it looks like</h2>
+    <p class="sub" data-ru="Снято в самой игре, без постановки.">Shot in the game itself, no staging.</p>
+
+    <div class="shots">
+      <figure class="shot big" style="margin:0">
+        <img src="assets/ring.jpg" alt="The closing ring surrounds the hero">
+        <span data-ru="Кольцо сомкнулось: выхода нет, только сквозь них">The ring has closed: the only way out is through</span>
+      </figure>
+      <figure class="shot" style="margin:0">
+        <img src="assets/gameplay.jpg" alt="Gameplay with a crowd of enemies">
+        <span data-ru="Обычная ночь на Проклятом кладбище">A normal night in the Cursed Graveyard</span>
+      </figure>
+      <figure class="shot" style="margin:0">
+        <img src="assets/levelup.jpg" alt="Level up card selection">
+        <span data-ru="Три проклятия на выбор">Pick one of three curses</span>
+      </figure>
+      <figure class="shot" style="margin:0">
+        <img src="assets/menu_en.jpg" alt="Main menu in English">
+        <span data-ru="Главное меню">Main menu</span>
+      </figure>
+      <figure class="shot" style="margin:0">
+        <img src="assets/shop.jpg" alt="The Cursed Shop">
+        <span data-ru="Проклятая лавка">The Cursed Shop</span>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="dim" id="play">
+  <div class="wrap">
+    <h2 data-ru="Как играть">How to play</h2>
+    <p class="sub" data-ru="Одна кнопка движения и очень много врагов.">One movement key at a time, and far too many enemies.</p>
+
+    <div class="split">
+      <div class="keys">
+        <div class="key-row"><kbd>W A S D</kbd><span data-ru="движение (или стрелки)">move (arrows work too)</span></div>
+        <div class="key-row"><kbd>1 2 3</kbd><span data-ru="выбор карты при повышении уровня">pick an upgrade card on level up</span></div>
+        <div class="key-row"><kbd>ESC</kbd><span data-ru="пауза и настройки">pause and settings</span></div>
+        <div class="key-row"><kbd>P</kbd><span data-ru="пауза">pause</span></div>
+      </div>
+
+      <div>
+        <ul class="plain">
+          <li data-ru="Оружие бьёт само — следи за толпой, а не за кнопками.">Weapons fire on their own: watch the crowd, not the buttons.</li>
+          <li data-ru="Не стой в телах: каждый моб в радиусе кусает отдельно.">Do not stand in bodies: every enemy in reach bites on its own.</li>
+          <li data-ru="Ходи по кругу, собирай души-кристаллы, добивай ослабленных.">Circle the arena, hoover up soul crystals, finish what is left.</li>
+          <li data-ru="Кольцо элит можно прорвать уроном или обогнать ногами.">The elite ring can be broken by damage or beaten on foot.</li>
+        </ul>
+        <p class="sub" style="text-align:left;margin:18px 0 0">
+          <strong data-ru="Требования:">Requirements:</strong>
+          <span data-ru="Windows 10/11, 4 ГБ ОЗУ, любая видеокарта с OpenGL 3.3, около 120 МБ на диске.">
+            Windows 10/11, 4 GB RAM, any GPU with OpenGL 3.3, about 120 MB of disk.
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="download">
+  <div class="wrap" style="text-align:center">
+    <h2 data-ru="Забери себе">Take it with you</h2>
+    <p class="sub" data-ru="Один exe, без установщика и лаунчеров. Распакуй и запускай.">
+      A single exe, no installer, no launcher. Unzip and run.
+    </p>
+    <div class="actions">
+      <a class="btn primary" id="downloadBtn2" href="#download" data-ru="Скачать Cursed Survivors 1.0">Download Cursed Survivors 1.0</a>
+      <a class="btn ghost" id="sourceBtn" href="#credits" data-ru="Исходный код на GitHub">Source on GitHub</a>
+    </div>
+    <p class="meta" data-ru="Сохранения лежат в папке пользователя Godot, рядом с настройками.">
+      Save data lives in the Godot user folder, next to the settings file.
+    </p>
+  </div>
+</section>
+
+<section class="dim" id="credits">
+  <div class="wrap">
+    <h2 data-ru="Благодарности">Credits</h2>
+    <p class="sub" data-ru="Игра собрана на Godot 4.7 и целиком нарисована кодом.">
+      Built with Godot 4.7 and drawn entirely by code.
+    </p>
+
+    <div class="grid">
+      <article class="card">
+        <h3>Art &amp; audio</h3>
+        <p data-ru="Спрайты, тайлы, иконки, свет, музыка и звуки сгенерированы скриптами Pillow и NumPy в папке tools/ этого репозитория.">
+          Sprites, tiles, icons, lighting, music and sound effects are generated by the Pillow and NumPy
+          scripts in this repository's <code>tools/</code> folder.
+        </p>
+      </article>
+      <article class="card">
+        <h3>Fonts</h3>
+        <p data-ru="Pirata One, Almendra, Cinzel, Metamorphous и Vampiro One — свободные шрифты под лицензией SIL Open Font License.">
+          Pirata One, Almendra, Cinzel, Metamorphous and Vampiro One — free fonts under the SIL Open Font
+          License.
+        </p>
+      </article>
+      <article class="card">
+        <h3>Engine &amp; licence</h3>
+        <p data-ru="Godot Engine 4.7 (MIT). Исходный код игры открыт под лицензией MIT.">
+          Godot Engine 4.7 (MIT). The game's source code is released under the MIT licence.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <strong class="wordmark" style="font-size:20px">Cursed Survivors</strong>
+      <div class="fine" data-ru="Сделано вручную, без внешних ассетов.">Handmade, with no external assets.</div>
+    </div>
+    <div class="fine">
+      <a id="ghLink" href="#credits">GitHub</a> ·
+      <a href="#download" data-ru="Скачать">Download</a> ·
+      <a href="#features" data-ru="Особенности">Features</a>
+    </div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox"><img id="lightboxImg" alt=""></div>
+
+<script>
+  // Set this to the public repository URL once it exists.
+  const REPO_URL = "https://github.com/YOUR-USER/cursed-survivors";
+  const RELEASE_URL = REPO_URL + "/releases/latest";
+
+  document.getElementById("downloadBtn").href = RELEASE_URL;
+  document.getElementById("downloadBtn2").href = RELEASE_URL;
+  document.getElementById("sourceBtn").href = REPO_URL;
+  document.getElementById("ghLink").href = REPO_URL;
+
+  // Lightweight EN/RU switch: every element carrying data-ru has its English
+  // text captured on first use, so toggling never loses the original.
+  const langBtn = document.getElementById("langBtn");
+  let lang = "en";
+  document.querySelectorAll("[data-ru]").forEach(el => { el.dataset.en = el.textContent.trim(); });
+
+  langBtn.addEventListener("click", () => {
+    lang = lang === "en" ? "ru" : "en";
+    document.documentElement.lang = lang;
+    langBtn.textContent = lang === "en" ? "RU" : "EN";
+    document.querySelectorAll("[data-ru]").forEach(el => {
+      el.textContent = lang === "ru" ? el.dataset.ru : el.dataset.en;
+    });
+  });
+
+  // Click a screenshot to see it full size.
+  const box = document.getElementById("lightbox");
+  const boxImg = document.getElementById("lightboxImg");
+  document.querySelectorAll(".shot img").forEach(img => {
+    img.addEventListener("click", () => {
+      boxImg.src = img.src;
+      boxImg.alt = img.alt;
+      box.classList.add("open");
+    });
+  });
+  box.addEventListener("click", () => box.classList.remove("open"));
+  document.addEventListener("keydown", e => { if (e.key === "Escape") box.classList.remove("open"); });
+</script>
+
+</body>
+</html>

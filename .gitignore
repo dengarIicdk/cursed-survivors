@@ -1,0 +1,21 @@
+# Godot editor and import cache
+.godot/
+*.translation
+
+# MCP runtime injected by the Godot tooling
+.mcp/
+
+# Bundled editor binaries (download your own Godot 4.7)
+Godot/
+
+# Build output
+build/
+dist/
+*.exe
+*.pck
+*.zip
+
+# Local OS noise
+Thumbs.db
+desktop.ini
+.DS_Store

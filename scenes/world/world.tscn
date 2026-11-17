@@ -1,0 +1,76 @@
+[gd_scene load_steps=15 format=3 uid="uid://world_main"]
+
+[ext_resource type="Script" path="res://scenes/world/world.gd" id="1_world"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy_spawner.gd" id="2_spawner"]
+[ext_resource type="PackedScene" uid="uid://ui_hud" path="res://scenes/ui/hud.tscn" id="3_hud"]
+[ext_resource type="PackedScene" uid="uid://ui_level_up_screen" path="res://scenes/ui/level_up_screen.tscn" id="4_levelup"]
+[ext_resource type="PackedScene" uid="uid://ui_game_over" path="res://scenes/ui/game_over_screen.tscn" id="5_gameover"]
+[ext_resource type="PackedScene" uid="uid://ui_pause_menu" path="res://scenes/ui/pause_menu.tscn" id="6_pause"]
+[ext_resource type="Script" path="res://scenes/world/decor.gd" id="7_decor"]
+[ext_resource type="Script" path="res://scenes/world/atmosphere.gd" id="8_atmo"]
+[ext_resource type="Shader" path="res://shaders/ground.gdshader" id="9_ground"]
+[ext_resource type="Shader" path="res://shaders/atmosphere.gdshader" id="10_atmo_shader"]
+[ext_resource type="Script" path="res://scenes/world/wildlife.gd" id="11_wildlife"]
+[ext_resource type="Script" path="res://scripts/world/ring_event.gd" id="12_ring"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ground"]
+shader = ExtResource("9_ground")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_atmo"]
+shader = ExtResource("10_atmo_shader")
+
+[node name="World" type="Node2D" groups=["world"]]
+script = ExtResource("1_world")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+z_index = -20
+offset_left = -4600.0
+offset_top = -4600.0
+offset_right = 4600.0
+offset_bottom = 4600.0
+color = Color(0.05, 0.031, 0.078, 1)
+mouse_filter = 2
+
+[node name="Ground" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ground")
+z_index = -10
+offset_left = -4600.0
+offset_top = -4600.0
+offset_right = 4600.0
+offset_bottom = 4600.0
+mouse_filter = 2
+
+[node name="Decor" type="Node2D" parent="."]
+script = ExtResource("7_decor")
+
+[node name="RingEvent" type="Node2D" parent="."]
+script = ExtResource("12_ring")
+
+[node name="Wildlife" type="Node2D" parent="."]
+script = ExtResource("11_wildlife")
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource("2_spawner")
+
+[node name="XPGems" type="Node2D" parent="."]
+
+[node name="Atmosphere" type="CanvasLayer" parent="."]
+script = ExtResource("8_atmo")
+layer = 2
+
+[node name="Overlay" type="ColorRect" parent="Atmosphere"]
+material = SubResource("ShaderMaterial_atmo")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HUD" parent="." instance=ExtResource("3_hud")]
+
+[node name="LevelUpScreen" parent="." instance=ExtResource("4_levelup")]
+
+[node name="GameOverScreen" parent="." instance=ExtResource("5_gameover")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("6_pause")]

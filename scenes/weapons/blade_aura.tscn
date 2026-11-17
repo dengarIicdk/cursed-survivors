@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://weapon_blade_aura"]
+
+[ext_resource type="Script" path="res://scripts/weapons/blade_aura.gd" id="1_blade"]
+
+[node name="BladeAura" type="Node"]
+script = ExtResource("1_blade")

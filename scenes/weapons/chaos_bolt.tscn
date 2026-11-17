@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://weapon_chaos_bolt"]
+
+[ext_resource type="Script" path="res://scripts/weapons/chaos_bolt.gd" id="1_chaos_bolt"]
+
+[node name="ChaosBolt" type="Node"]
+script = ExtResource("1_chaos_bolt")

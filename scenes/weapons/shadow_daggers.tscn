@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://weapon_shadow_daggers"]
+
+[ext_resource type="Script" path="res://scripts/weapons/shadow_daggers.gd" id="1_daggers"]
+
+[node name="ShadowDaggers" type="Node"]
+script = ExtResource("1_daggers")

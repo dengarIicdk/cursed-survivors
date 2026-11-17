@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://enemy_ghost"]
+
+[ext_resource type="Script" path="res://scripts/enemies/ghost.gd" id="1_ghost"]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/ghost.png" id="tex_art"]
+[ext_resource type="Texture2D" path="res://assets/sprites/fx/shadow.png" id="tex_shadow"]
+[ext_resource type="Script" path="res://scripts/fx/idle_bob.gd" id="script_bob"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_hit"]
+radius = 19.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_col"]
+radius = 11.0
+
+[node name="Ghost" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_ghost")
+
+[node name="Visual" type="Sprite2D" parent="."]
+texture = ExtResource("tex_art")
+scale = Vector2(0.42, 0.42)
+script = ExtResource("script_bob")
+bob_amplitude = 2.4
+
+[node name="Shadow" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(0, 14)
+texture = ExtResource("tex_shadow")
+scale = Vector2(0.525, 0.445)
+modulate = Color(1, 1, 1, 0.7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_col")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="HitBoxShape" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_hit")
