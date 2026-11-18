@@ -12,10 +12,10 @@
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 <script type="importmap">
-{ "imports": { "three": "./js/vendor/three.module.js" } }
+{ "imports": { "three": "./js/vendor/three.module.js?v=4" } }
 </script>
-<script type="module" src="js/ring3d.js"></script>
-<script type="module" src="js/heroes3d.js"></script>
+<script type="module" src="js/ring3d.js?v=4"></script>
+<script type="module" src="js/heroes3d.js?v=4"></script>
 </head>
 <body>
 
@@ -134,17 +134,21 @@
 
       <div class="hero-side">
         <div class="hero-tabs" role="tablist">
-          <button class="hero-tab active" data-hero="hexblade" type="button">
-            <span class="dot" style="--c:#b06bff"></span><span data-ru="Клинок Скверны">Hexblade</span>
+          <button class="hero-tab active" data-hero="hexblade" type="button" role="tab" aria-selected="true" style="--c:#b06bff">
+            <img class="hero-ico" src="assets/site/heroes/hexblade.png" alt="" width="34" height="34">
+            <span data-ru="Клинок Скверны">Hexblade</span>
           </button>
-          <button class="hero-tab" data-hero="ironclad" type="button">
-            <span class="dot" style="--c:#d98a3a"></span><span data-ru="Железный">Ironclad</span>
+          <button class="hero-tab" data-hero="ironclad" type="button" role="tab" aria-selected="false" style="--c:#d98a3a">
+            <img class="hero-ico" src="assets/site/heroes/ironclad.png" alt="" width="34" height="34">
+            <span data-ru="Железный">Ironclad</span>
           </button>
-          <button class="hero-tab" data-hero="wraithborn" type="button">
-            <span class="dot" style="--c:#3fe0c8"></span><span data-ru="Дитя Тени">Wraithborn</span>
+          <button class="hero-tab" data-hero="wraithborn" type="button" role="tab" aria-selected="false" style="--c:#3fe0c8">
+            <img class="hero-ico" src="assets/site/heroes/wraithborn.png" alt="" width="34" height="34">
+            <span data-ru="Дитя Тени">Wraithborn</span>
           </button>
-          <button class="hero-tab" data-hero="stormcaller" type="button">
-            <span class="dot" style="--c:#6fc4ff"></span><span data-ru="Зов Бури">Stormcaller</span>
+          <button class="hero-tab" data-hero="stormcaller" type="button" role="tab" aria-selected="false" style="--c:#6fc4ff">
+            <img class="hero-ico" src="assets/site/heroes/stormcaller.png" alt="" width="34" height="34">
+            <span data-ru="Зов Бури">Stormcaller</span>
           </button>
         </div>
 

@@ -501,19 +501,34 @@ if (canvas && stage && tabs.length) {
     }
   }
 
-  tabs.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      tabs.forEach((b) => b.classList.toggle("active", b === btn));
-      select(btn.dataset.hero);
-      const lang = document.documentElement.lang === "ru" ? "ru" : "en";
-      renderHeroPanel(btn.dataset.hero, lang);
-      const panel = document.querySelector("[data-hero-panel]");
-      if (panel) {
-        panel.classList.remove("swap");
-        void panel.offsetWidth;
-        panel.classList.add("swap");
-      }
+  // One delegated listener: a stale element or a click on the inner <img> both work.
+  function choose(key) {
+    if (!key || !models[key]) return;
+    const lang = document.documentElement.lang === "ru" ? "ru" : "en";
+    tabs.forEach((b) => {
+      const on = b.dataset.hero === key;
+      b.classList.toggle("active", on);
+      b.setAttribute("aria-selected", on ? "true" : "false");
     });
+    select(key);
+    renderHeroPanel(key, lang);
+    const panel = document.querySelector("[data-hero-panel]");
+    if (panel) {
+      panel.dataset.heroActive = key;
+      panel.classList.remove("swap");
+      void panel.offsetWidth;
+      panel.classList.add("swap");
+    }
+  }
+  document.addEventListener("click", (e) => {
+    const btn = e.target && e.target.closest ? e.target.closest("[data-hero]") : null;
+    if (btn) choose(btn.dataset.hero);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (!document.getElementById("heroes").contains(document.activeElement)) return;
+    const i = tabs.findIndex((b) => b.dataset.hero === activeKey);
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); choose(tabs[(i + 1) % tabs.length].dataset.hero); tabs[(i + 1) % tabs.length].focus(); }
+    if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); const n = (i - 1 + tabs.length) % tabs.length; choose(tabs[n].dataset.hero); tabs[n].focus(); }
   });
 
   canvas.addEventListener("pointerdown", (e) => {
@@ -545,7 +560,11 @@ if (canvas && stage && tabs.length) {
   const startKey = wanted && Object.prototype.hasOwnProperty.call(models, wanted) ? wanted : "hexblade";
   select(startKey);
   renderHeroPanel(startKey, document.documentElement.lang === "ru" ? "ru" : "en");
-  tabs.forEach((b) => b.classList.toggle("active", b.dataset.hero === startKey));
+  tabs.forEach((b) => {
+    const on = b.dataset.hero === startKey;
+    b.classList.toggle("active", on);
+    b.setAttribute("aria-selected", on ? "true" : "false");
+  });
 
   const forceMotion = new URLSearchParams(location.search).has("motion");
   const reduce = !forceMotion && window.matchMedia("(prefers-reduced-motion: reduce)").matches;

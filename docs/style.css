@@ -641,6 +641,23 @@ footer .fine { color: #8d7f9c; font-size: 13.5px; }
   flex: none;
 }
 
+/* the in-game sprite doubles as the tab icon */
+.hero-ico {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 9px;
+  background: radial-gradient(70% 70% at 50% 30%, #241733, #100a18);
+  box-shadow: inset 0 0 0 1px #3a2b4d;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.hero-tab:hover .hero-ico { transform: translateY(-1px) scale(1.04); }
+
+.hero-tab.active .hero-ico {
+  box-shadow: inset 0 0 0 1px var(--c, var(--gold)), 0 0 16px color-mix(in srgb, var(--c, #b06bff) 45%, transparent);
+}
+
 .hero-panel {
   border: 1px solid var(--edge);
   border-radius: 18px;
