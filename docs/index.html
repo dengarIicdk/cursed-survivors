@@ -11,6 +11,11 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+<script type="module" src="js/ring3d.js"></script>
+<script type="module" src="js/heroes3d.js"></script>
 </head>
 <body>
 
@@ -19,6 +24,7 @@
     <span class="wordmark">Cursed Survivors</span>
     <span class="spacer"></span>
     <a class="navlink" href="#features" data-ru="Особенности">Features</a>
+    <a class="navlink" href="#heroes" data-ru="Герои">Survivors</a>
     <a class="navlink" href="#screens" data-ru="Скриншоты">Screenshots</a>
     <a class="navlink" href="#play" data-ru="Как играть">How to play</a>
     <a class="navlink" href="#credits" data-ru="Благодарности">Credits</a>
@@ -28,6 +34,7 @@
 
 <header class="hero">
   <div class="hero-bg" aria-hidden="true"></div>
+  <canvas id="ring3d" class="hero-canvas" aria-hidden="true"></canvas>
   <div class="embers" id="embers" aria-hidden="true"></div>
   <div class="inner">
     <span class="kicker rise" data-ru="Бесплатно · Windows · Открытый код">Free · Windows · Open source</span>
@@ -110,6 +117,72 @@
   </div>
 </section>
 
+
+<section id="heroes" class="heroes-sec">
+  <div class="wrap">
+    <h2 data-reveal data-ru="Четыре выживших, четыре способа умереть">Four survivors, four ways to die</h2>
+    <p class="sub" data-reveal data-ru="Свой арсенал, своя механика, своя причина не отпускать кнопку движения. Покрути модель — она настоящая, только из примитивов.">
+      Their own arsenal, their own trick, their own reason not to let go of the movement key.
+      Spin the model — it is real, just built from primitives.
+    </p>
+
+    <div class="hero-lab" data-reveal>
+      <div class="hero-stage">
+        <canvas id="heroes3d" aria-hidden="true"></canvas>
+        <span class="stage-hint" data-ru="потяни, чтобы повернуть">drag to spin</span>
+      </div>
+
+      <div class="hero-side">
+        <div class="hero-tabs" role="tablist">
+          <button class="hero-tab active" data-hero="hexblade" type="button">
+            <span class="dot" style="--c:#b06bff"></span><span data-ru="Клинок Скверны">Hexblade</span>
+          </button>
+          <button class="hero-tab" data-hero="ironclad" type="button">
+            <span class="dot" style="--c:#d98a3a"></span><span data-ru="Железный">Ironclad</span>
+          </button>
+          <button class="hero-tab" data-hero="wraithborn" type="button">
+            <span class="dot" style="--c:#3fe0c8"></span><span data-ru="Дитя Тени">Wraithborn</span>
+          </button>
+          <button class="hero-tab" data-hero="stormcaller" type="button">
+            <span class="dot" style="--c:#6fc4ff"></span><span data-ru="Зов Бури">Stormcaller</span>
+          </button>
+        </div>
+
+        <div class="hero-panel" data-hero-panel data-hero-active="hexblade">
+          <div class="hp-head">
+            <div>
+              <p class="hp-role" data-ru="маг · дальний бой">mage · ranged</p>
+              <h3 data-ru="Клинок Скверны">Hexblade</h3>
+            </div>
+            <span class="hp-badge" data-ru="открыт сразу">unlocked</span>
+          </div>
+          <p class="hp-text" data-ru="Начинает с орбитами чар. С каждым уровнем урон растёт быстрее, чем у остальных, а с убийств иногда срывается призрачная копия — три секунды стреляет за тебя, пока ты бежишь.">
+            Starts with orbiting orbs. Damage scales faster per level than anyone else, and kills
+            sometimes tear loose a spectral clone that keeps firing for three seconds while you run.
+          </p>
+          <ul class="chips">
+            <li data-ru="Орбиты чар">Arcane Orbs</li>
+            <li data-ru="Реквием пустоты">Void Requiem</li>
+            <li data-ru="Клинки тени">Shadow Daggers</li>
+          </ul>
+          <div class="hp-stats">
+            <div><b>+15%</b><span data-ru="урона за уровень">damage per level</span></div>
+            <div><b>10%</b><span data-ru="шанс призрачной копии">spectral clone</span></div>
+            <div><b>3 с</b><span data-ru="живёт копия">clone lifetime</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-strip" data-reveal>
+      <div><b>4</b><span data-ru="героя">survivors</span></div>
+      <div><b>10+</b><span data-ru="оружий и эволюций">weapons &amp; evolutions</span></div>
+      <div><b>9</b><span data-ru="типов врагов">enemy types</span></div>
+      <div><b>2</b><span data-ru="карты">maps</span></div>
+      <div><b>0</b><span data-ru="чужих ассетов">borrowed assets</span></div>
+    </div>
+  </div>
+</section>
 <section id="screens">
   <div class="wrap">
     <h2 data-reveal data-ru="Так это выглядит">What it looks like</h2>
@@ -267,6 +340,7 @@
       ? "Cursed Survivors — бесплатная готическая выживалка"
       : "Cursed Survivors — a free gothic survivor-like";
     document.title = title;
+    if (window.renderHeroPanel) window.renderHeroPanel(next);
     try { localStorage.setItem("cs-lang", next); } catch (e) {}
   }
 
