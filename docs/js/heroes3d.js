@@ -232,10 +232,23 @@ if (canvas && stage && tabs.length) {
     // three orbiting orbs — the signature weapon
     const orbs = new THREE.Group();
     const orbMat = new THREE.MeshBasicMaterial({ color: 0xc99bff });
+    const glowTex = (() => {
+      const c = document.createElement("canvas");
+      c.width = c.height = 64;
+      const g = c.getContext("2d");
+      const grd = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+      grd.addColorStop(0, "rgba(255,255,255,1)");
+      grd.addColorStop(0.4, "rgba(205,155,255,0.55)");
+      grd.addColorStop(1, "rgba(150,80,255,0)");
+      g.fillStyle = grd;
+      g.fillRect(0, 0, 64, 64);
+      return new THREE.CanvasTexture(c);
+    })();
     const glowSpr = new THREE.SpriteMaterial({
-      color: 0xb06bff,
+      map: glowTex,
+      color: 0xc79bff,
       transparent: true,
-      opacity: 0.55,
+      opacity: 0.75,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
     });
@@ -480,6 +493,7 @@ if (canvas && stage && tabs.length) {
 
   let active = null;
   let activeKey = "";
+  let reduce = false;
   let spin = 0;
   let spinTarget = 0;
   let dragging = false;
@@ -498,6 +512,7 @@ if (canvas && stage && tabs.length) {
       active.scale.setScalar(0.001);
       classLight.color.setHex(CLASS_COLORS[key] || 0xffffff);
       active.userData.grow = 0;
+      if (reduce) drawNow();
     }
   }
 
@@ -540,6 +555,7 @@ if (canvas && stage && tabs.length) {
     if (!dragging) return;
     spinTarget += (e.clientX - lastX) * 0.012;
     lastX = e.clientX;
+    if (reduce) drawNow();
   });
   canvas.addEventListener("pointerup", () => { dragging = false; });
   canvas.addEventListener("pointercancel", () => { dragging = false; });
@@ -551,6 +567,7 @@ if (canvas && stage && tabs.length) {
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
+    if (reduce) drawNow();
   }
   resize();
   window.addEventListener("resize", resize);
@@ -567,7 +584,7 @@ if (canvas && stage && tabs.length) {
   });
 
   const forceMotion = new URLSearchParams(location.search).has("motion");
-  const reduce = !forceMotion && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  reduce = !forceMotion && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const clock = new THREE.Clock();
   let visible = true;
 
@@ -575,6 +592,36 @@ if (canvas && stage && tabs.length) {
     for (const e of entries) visible = e.isIntersecting;
   }, { threshold: 0.05 });
   io.observe(stage);
+
+  function draw(t) {
+    for (const key of Object.keys(models)) {
+      const m = models[key];
+      if (m === active) {
+        const grow = m.userData.grow || 0;
+        const s = 1 - Math.pow(1 - grow, 3);
+        m.scale.setScalar(0.85 + s * 0.15);
+        m.position.y = reduce ? 0 : Math.sin(t * 1.1) * 0.03;
+        m.rotation.y = spin;
+        if (m.userData.animate) m.userData.animate(reduce ? 1.2 : t, reduce ? 0.016 : 0.016);
+      }
+    }
+    if (!reduce) {
+      shadow.scale.setScalar(1 + Math.sin(t * 1.1) * 0.02);
+      runeOuter.rotation.z = t * 0.25;
+      runeInner.rotation.z = -t * 0.4;
+    }
+    runeMat.color.setHex(CLASS_COLORS[activeKey] || 0x8e6bc0);
+    renderer.render(scene, camera);
+  }
+
+  /* Reduced motion means "do not animate by itself", not "do not react":
+     a tab switch or a drag still redraws a fresh frame. */
+  function drawNow() {
+    if (!active) return;
+    active.userData.grow = 1;
+    spin = spinTarget;
+    draw(clock.elapsedTime);
+  }
 
   function tick() {
     const dt = Math.min(clock.getDelta(), 0.05);
@@ -586,53 +633,60 @@ if (canvas && stage && tabs.length) {
 
     for (const key of Object.keys(models)) {
       const m = models[key];
-      if (m === active) {
-        m.userData.grow = Math.min(1, (m.userData.grow || 0) + dt * 4.2);
-        const s = 1 - Math.pow(1 - m.userData.grow, 3);
-        m.scale.setScalar(0.85 + s * 0.15);
-        m.position.y = Math.sin(t * 1.1) * 0.03;
-        m.rotation.y = spin;
-        if (m.userData.animate) m.userData.animate(t, dt);
-      }
+      if (m === active) m.userData.grow = Math.min(1, (m.userData.grow || 0) + dt * 4.2);
     }
-    shadow.scale.setScalar(1 + Math.sin(t * 1.1) * 0.02);
-    runeMat.color.setHex(CLASS_COLORS[activeKey] || 0x8e6bc0);
-    runeOuter.rotation.z = t * 0.25;
-    runeInner.rotation.z = -t * 0.4;
+    draw(t);
+  }
 
-    renderer.render(scene, camera);
+  /* Windows "show animations" off lands here. The model still switches and
+     drags, and one click on the stage turns the idle motion back on. */
+  function startMotion() {
+    reduce = false;
+    active.userData.grow = 1;
+    renderer.setAnimationLoop(tick);
+    const pill = document.getElementById("heroMotion");
+    if (pill) pill.remove();
   }
 
   if (reduce) {
-    resize();
-    active.scale.setScalar(1);
-    active.userData.animate(1.2, 0.016);
-    renderer.render(scene, camera);
-    setTimeout(() => {
-      resize();
-      renderer.render(scene, camera);
-    }, 400);
+    document.body.classList.add("has-3d-heroes");
+    canvas.classList.add("live");
+    drawNow();
+    setTimeout(() => { resize(); drawNow(); }, 400);
+
+    const ru = document.documentElement.lang === "ru";
+    const pill = document.createElement("button");
+    pill.type = "button";
+    pill.id = "heroMotion";
+    pill.className = "stage-play";
+    pill.textContent = ru ? "включить вращение" : "enable motion";
+    pill.addEventListener("click", startMotion);
+    stage.appendChild(pill);
   } else {
     renderer.setAnimationLoop(tick);
     document.body.classList.add("has-3d-heroes");
-    if (wantShot) {
-      resize();
-      active.scale.setScalar(1);
-      active.rotation.y = 0.6;
-      active.userData.animate(1.2, 0.016);
-      renderer.render(scene, camera);
-      setTimeout(() => {
-        const url = renderer.domElement.toDataURL("image/png");
-      try { fetch("/shot/" + "heroes", { method: "POST", body: url }); } catch (e) {}
+  }
+
+  // ?shot: hand a frame back to a headless test run (see the dev shot server)
+  if (wantShot) {
+    resize();
+    active.userData.grow = 1;
+    active.scale.setScalar(1);
+    active.rotation.y = 0.6;
+    active.userData.animate(1.2, 0.016);
+    renderer.render(scene, camera);
+    setTimeout(() => {
+      let url = "";
+      try {
+        url = renderer.domElement.toDataURL("image/png");
+        fetch("/shot/heroes", { method: "POST", body: url });
+      } catch (err) {
+        url = "ERR " + err.message;
+      }
       const box = document.createElement("textarea");
-        box.id = "shotHeroes";
-        try {
-          box.value = url;
-        } catch (err) {
-          box.value = "ERR " + err.message;
-        }
-        document.body.appendChild(box);
-      }, 2400);
-    }
+      box.id = "shotHeroes";
+      box.textContent = url.length > 200 ? "png:" + url.length : url;
+      document.body.appendChild(box);
+    }, 2400);
   }
 }

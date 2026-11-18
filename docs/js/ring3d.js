@@ -450,7 +450,8 @@ if (canvas && stage) {
   }
 
   if (reduce) {
-    // one still frame, ring half closed — still needs to be visible
+    // one still frame, ring half closed — a click brings the motion back
+    canvas.addEventListener("pointerdown", () => start(), { once: true, capture: true });
     state.closeT = 0.62;
     placeStones(radiusAt(0.62));
     camera.position.set(0, 3.25, 9.6);

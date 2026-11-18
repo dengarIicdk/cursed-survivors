@@ -584,6 +584,27 @@ footer .fine { color: #8d7f9c; font-size: 13.5px; }
 
 .hero-stage canvas:active { cursor: grabbing; }
 
+/* shown only when the system asks for less motion */
+.stage-play {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  z-index: 3;
+  padding: 7px 13px;
+  border-radius: 999px;
+  border: 1px solid #4c3a63;
+  background: #150d1fcc;
+  color: #cbb9e0;
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.stage-play:hover { border-color: var(--gold); color: var(--bone); }
+
 .stage-hint {
   position: absolute;
   left: 16px;
