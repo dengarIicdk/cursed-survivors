@@ -19,3 +19,6 @@ dist/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Godot import metadata for the website art
+docs/**/*.import
