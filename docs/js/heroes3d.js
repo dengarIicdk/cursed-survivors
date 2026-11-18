@@ -540,9 +540,12 @@ if (canvas && stage && tabs.length) {
   resize();
   window.addEventListener("resize", resize);
 
-  select("hexblade");
-  renderHeroPanel("hexblade", document.documentElement.lang === "ru" ? "ru" : "en");
-  if (tabs[0]) tabs[0].classList.add("active");
+  // ?hero=stormcaller deep-links straight into one survivor
+  const wanted = new URLSearchParams(location.search).get("hero");
+  const startKey = wanted && Object.prototype.hasOwnProperty.call(models, wanted) ? wanted : "hexblade";
+  select(startKey);
+  renderHeroPanel(startKey, document.documentElement.lang === "ru" ? "ru" : "en");
+  tabs.forEach((b) => b.classList.toggle("active", b.dataset.hero === startKey));
 
   const forceMotion = new URLSearchParams(location.search).has("motion");
   const reduce = !forceMotion && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
