@@ -22,3 +22,4 @@ desktop.ini
 
 # Godot import metadata for the website art
 docs/**/*.import
+installer/*.import
